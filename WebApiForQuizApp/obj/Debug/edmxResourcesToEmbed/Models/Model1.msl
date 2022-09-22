@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="db_QUIZModelStoreContainer" CdmEntityContainer="db_QUIZEntities">
+    <EntitySetMapping Name="TBL_EXAM">
+      <EntityTypeMapping TypeName="db_QUIZModel.TBL_EXAM">
+        <MappingFragment StoreEntitySet="TBL_EXAM">
+          <ScalarProperty Name="exam_Status" ColumnName="exam_Status" />
+          <ScalarProperty Name="exam_id" ColumnName="exam_id" />
+          <ScalarProperty Name="exam_Name" ColumnName="exam_Name" />
+          <ScalarProperty Name="exam_CreatedBy" ColumnName="exam_CreatedBy" />
+          <ScalarProperty Name="exam_AppearCode" ColumnName="exam_AppearCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_QUESTION">
+      <EntityTypeMapping TypeName="db_QUIZModel.TBL_QUESTION">
+        <MappingFragment StoreEntitySet="TBL_QUESTION">
+          <ScalarProperty Name="Question_id" ColumnName="Question_id" />
+          <ScalarProperty Name="Question_exam_id" ColumnName="Question_exam_id" />
+          <ScalarProperty Name="Question_Text" ColumnName="Question_Text" />
+          <ScalarProperty Name="Question_Option1" ColumnName="Question_Option1" />
+          <ScalarProperty Name="Question_Option2" ColumnName="Question_Option2" />
+          <ScalarProperty Name="Question_Option3" ColumnName="Question_Option3" />
+          <ScalarProperty Name="Question_Option4" ColumnName="Question_Option4" />
+          <ScalarProperty Name="Question_Option5" ColumnName="Question_Option5" />
+          <ScalarProperty Name="Question_type" ColumnName="Question_type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_User">
+      <EntityTypeMapping TypeName="db_QUIZModel.tbl_User">
+        <MappingFragment StoreEntitySet="tbl_User">
+          <ScalarProperty Name="userid" ColumnName="userid" />
+          <ScalarProperty Name="userName" ColumnName="userName" />
+          <ScalarProperty Name="userLoginName" ColumnName="userLoginName" />
+          <ScalarProperty Name="userPassword" ColumnName="userPassword" />
+          <ScalarProperty Name="userImage" ColumnName="userImage" />
+          <ScalarProperty Name="userType" ColumnName="userType" />
+          <ScalarProperty Name="userCreatedBy" ColumnName="userCreatedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_UserType">
+      <EntityTypeMapping TypeName="db_QUIZModel.tbl_UserType">
+        <MappingFragment StoreEntitySet="tbl_UserType">
+          <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+          <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

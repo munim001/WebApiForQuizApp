@@ -1,0 +1,288 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="db_QUIZModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TBL_EXAM">
+          <Key>
+            <PropertyRef Name="exam_id" />
+          </Key>
+          <Property Name="exam_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="exam_Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="exam_CreatedBy" Type="bigint" />
+          <Property Name="exam_AppearCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="exam_Status" Type="bit" />
+        </EntityType>
+        <EntityType Name="TBL_QUESTION">
+          <Key>
+            <PropertyRef Name="Question_id" />
+          </Key>
+          <Property Name="Question_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Question_exam_id" Type="bigint" />
+          <Property Name="Question_Text" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Question_Option1" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Question_Option2" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Question_Option3" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Question_Option4" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Question_Option5" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Question_type" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_User">
+          <Key>
+            <PropertyRef Name="userid" />
+          </Key>
+          <Property Name="userid" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="userLoginName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="userPassword" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="userImage" Type="nvarchar" MaxLength="50" />
+          <Property Name="userType" Type="int" />
+          <Property Name="userCreatedBy" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_UserType">
+          <Key>
+            <PropertyRef Name="TypeId" />
+          </Key>
+          <Property Name="TypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeName" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__TBL_EXAM__exam_C__3D5E1FD2">
+          <End Role="tbl_User" Type="Self.tbl_User" Multiplicity="0..1" />
+          <End Role="TBL_EXAM" Type="Self.TBL_EXAM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_User">
+              <PropertyRef Name="userid" />
+            </Principal>
+            <Dependent Role="TBL_EXAM">
+              <PropertyRef Name="exam_CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TBL_QUEST__Quest__403A8C7D">
+          <End Role="TBL_EXAM" Type="Self.TBL_EXAM" Multiplicity="0..1" />
+          <End Role="TBL_QUESTION" Type="Self.TBL_QUESTION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_EXAM">
+              <PropertyRef Name="exam_id" />
+            </Principal>
+            <Dependent Role="TBL_QUESTION">
+              <PropertyRef Name="Question_exam_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_User__userTy__3A81B327">
+          <End Role="tbl_UserType" Type="Self.tbl_UserType" Multiplicity="0..1" />
+          <End Role="tbl_User" Type="Self.tbl_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_UserType">
+              <PropertyRef Name="TypeId" />
+            </Principal>
+            <Dependent Role="tbl_User">
+              <PropertyRef Name="userType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="db_QUIZModelStoreContainer">
+          <EntitySet Name="TBL_EXAM" EntityType="Self.TBL_EXAM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_QUESTION" EntityType="Self.TBL_QUESTION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_User" EntityType="Self.tbl_User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_UserType" EntityType="Self.tbl_UserType" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__TBL_EXAM__exam_C__3D5E1FD2" Association="Self.FK__TBL_EXAM__exam_C__3D5E1FD2">
+            <End Role="tbl_User" EntitySet="tbl_User" />
+            <End Role="TBL_EXAM" EntitySet="TBL_EXAM" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TBL_QUEST__Quest__403A8C7D" Association="Self.FK__TBL_QUEST__Quest__403A8C7D">
+            <End Role="TBL_EXAM" EntitySet="TBL_EXAM" />
+            <End Role="TBL_QUESTION" EntitySet="TBL_QUESTION" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_User__userTy__3A81B327" Association="Self.FK__tbl_User__userTy__3A81B327">
+            <End Role="tbl_UserType" EntitySet="tbl_UserType" />
+            <End Role="tbl_User" EntitySet="tbl_User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="db_QUIZModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="TBL_EXAM">
+          <Key>
+            <PropertyRef Name="exam_id" />
+          </Key>
+          <Property Name="exam_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="exam_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="exam_CreatedBy" Type="Int64" />
+          <Property Name="exam_AppearCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbl_User" Relationship="Self.FK__TBL_EXAM__exam_C__3D5E1FD2" FromRole="TBL_EXAM" ToRole="tbl_User" />
+          <NavigationProperty Name="TBL_QUESTION" Relationship="Self.FK__TBL_QUEST__Quest__403A8C7D" FromRole="TBL_EXAM" ToRole="TBL_QUESTION" />
+          <Property Name="exam_Status" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="TBL_QUESTION">
+          <Key>
+            <PropertyRef Name="Question_id" />
+          </Key>
+          <Property Name="Question_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Question_exam_id" Type="Int64" />
+          <Property Name="Question_Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Question_Option1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Question_Option2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Question_Option3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Question_Option4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Question_Option5" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Question_type" Type="Int32" />
+          <NavigationProperty Name="TBL_EXAM" Relationship="Self.FK__TBL_QUEST__Quest__403A8C7D" FromRole="TBL_QUESTION" ToRole="TBL_EXAM" />
+        </EntityType>
+        <EntityType Name="tbl_User">
+          <Key>
+            <PropertyRef Name="userid" />
+          </Key>
+          <Property Name="userid" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="userLoginName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="userPassword" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="userImage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="userType" Type="Int32" />
+          <Property Name="userCreatedBy" Type="Int32" />
+          <NavigationProperty Name="TBL_EXAM" Relationship="Self.FK__TBL_EXAM__exam_C__3D5E1FD2" FromRole="tbl_User" ToRole="TBL_EXAM" />
+          <NavigationProperty Name="tbl_UserType" Relationship="Self.FK__tbl_User__userTy__3A81B327" FromRole="tbl_User" ToRole="tbl_UserType" />
+        </EntityType>
+        <EntityType Name="tbl_UserType">
+          <Key>
+            <PropertyRef Name="TypeId" />
+          </Key>
+          <Property Name="TypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tbl_User" Relationship="Self.FK__tbl_User__userTy__3A81B327" FromRole="tbl_UserType" ToRole="tbl_User" />
+        </EntityType>
+        <Association Name="FK__TBL_EXAM__exam_C__3D5E1FD2">
+          <End Role="tbl_User" Type="Self.tbl_User" Multiplicity="0..1" />
+          <End Role="TBL_EXAM" Type="Self.TBL_EXAM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_User">
+              <PropertyRef Name="userid" />
+            </Principal>
+            <Dependent Role="TBL_EXAM">
+              <PropertyRef Name="exam_CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TBL_QUEST__Quest__403A8C7D">
+          <End Role="TBL_EXAM" Type="Self.TBL_EXAM" Multiplicity="0..1" />
+          <End Role="TBL_QUESTION" Type="Self.TBL_QUESTION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_EXAM">
+              <PropertyRef Name="exam_id" />
+            </Principal>
+            <Dependent Role="TBL_QUESTION">
+              <PropertyRef Name="Question_exam_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbl_User__userTy__3A81B327">
+          <End Role="tbl_UserType" Type="Self.tbl_UserType" Multiplicity="0..1" />
+          <End Role="tbl_User" Type="Self.tbl_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_UserType">
+              <PropertyRef Name="TypeId" />
+            </Principal>
+            <Dependent Role="tbl_User">
+              <PropertyRef Name="userType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="db_QUIZEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TBL_EXAM" EntityType="Self.TBL_EXAM" />
+          <EntitySet Name="TBL_QUESTION" EntityType="Self.TBL_QUESTION" />
+          <EntitySet Name="tbl_User" EntityType="Self.tbl_User" />
+          <EntitySet Name="tbl_UserType" EntityType="Self.tbl_UserType" />
+          <AssociationSet Name="FK__TBL_EXAM__exam_C__3D5E1FD2" Association="Self.FK__TBL_EXAM__exam_C__3D5E1FD2">
+            <End Role="tbl_User" EntitySet="tbl_User" />
+            <End Role="TBL_EXAM" EntitySet="TBL_EXAM" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TBL_QUEST__Quest__403A8C7D" Association="Self.FK__TBL_QUEST__Quest__403A8C7D">
+            <End Role="TBL_EXAM" EntitySet="TBL_EXAM" />
+            <End Role="TBL_QUESTION" EntitySet="TBL_QUESTION" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbl_User__userTy__3A81B327" Association="Self.FK__tbl_User__userTy__3A81B327">
+            <End Role="tbl_UserType" EntitySet="tbl_UserType" />
+            <End Role="tbl_User" EntitySet="tbl_User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="db_QUIZModelStoreContainer" CdmEntityContainer="db_QUIZEntities">
+          <EntitySetMapping Name="TBL_EXAM">
+            <EntityTypeMapping TypeName="db_QUIZModel.TBL_EXAM">
+              <MappingFragment StoreEntitySet="TBL_EXAM">
+                <ScalarProperty Name="exam_Status" ColumnName="exam_Status" />
+                <ScalarProperty Name="exam_id" ColumnName="exam_id" />
+                <ScalarProperty Name="exam_Name" ColumnName="exam_Name" />
+                <ScalarProperty Name="exam_CreatedBy" ColumnName="exam_CreatedBy" />
+                <ScalarProperty Name="exam_AppearCode" ColumnName="exam_AppearCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_QUESTION">
+            <EntityTypeMapping TypeName="db_QUIZModel.TBL_QUESTION">
+              <MappingFragment StoreEntitySet="TBL_QUESTION">
+                <ScalarProperty Name="Question_id" ColumnName="Question_id" />
+                <ScalarProperty Name="Question_exam_id" ColumnName="Question_exam_id" />
+                <ScalarProperty Name="Question_Text" ColumnName="Question_Text" />
+                <ScalarProperty Name="Question_Option1" ColumnName="Question_Option1" />
+                <ScalarProperty Name="Question_Option2" ColumnName="Question_Option2" />
+                <ScalarProperty Name="Question_Option3" ColumnName="Question_Option3" />
+                <ScalarProperty Name="Question_Option4" ColumnName="Question_Option4" />
+                <ScalarProperty Name="Question_Option5" ColumnName="Question_Option5" />
+                <ScalarProperty Name="Question_type" ColumnName="Question_type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_User">
+            <EntityTypeMapping TypeName="db_QUIZModel.tbl_User">
+              <MappingFragment StoreEntitySet="tbl_User">
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="userLoginName" ColumnName="userLoginName" />
+                <ScalarProperty Name="userPassword" ColumnName="userPassword" />
+                <ScalarProperty Name="userImage" ColumnName="userImage" />
+                <ScalarProperty Name="userType" ColumnName="userType" />
+                <ScalarProperty Name="userCreatedBy" ColumnName="userCreatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_UserType">
+            <EntityTypeMapping TypeName="db_QUIZModel.tbl_UserType">
+              <MappingFragment StoreEntitySet="tbl_UserType">
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
